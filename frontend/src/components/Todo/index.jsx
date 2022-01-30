@@ -23,7 +23,7 @@ function Todo() {
         <PageHeader title={"Lista"} small="Tarefas" />
         <TodoForm fnUpdate={fecthToDos} />
       </Header>
-      <TodoList list={toDos} />
+      <TodoList list={toDos} fnUpdate={fecthToDos} />
     </Container>
   );
 }

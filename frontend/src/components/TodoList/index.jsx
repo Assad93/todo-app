@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "./styles";
 import TodoItem from "../TodoItem";
 
-function TodoList({ list }) {
+function TodoList({ list, fnUpdate }) {
   return (
     <Table>
       <thead>
@@ -13,7 +13,7 @@ function TodoList({ list }) {
       </thead>
       <tbody>
         {list?.map((item) => {
-          return <TodoItem key={item._id} description={item.description} />;
+          return <TodoItem key={item._id} item={item} fnUpdate={fnUpdate} />;
         })}
       </tbody>
     </Table>

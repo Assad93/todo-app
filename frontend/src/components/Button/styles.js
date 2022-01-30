@@ -11,6 +11,6 @@ export const ActionButton = styled.button`
   color: #fff;
 
   &:hover {
-    opacity: 0.8;
+    opacity: ${(props) => (props.disabled ? 1 : 0.8)};
   }
 `;
