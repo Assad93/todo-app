@@ -9,9 +9,3 @@ export const Table = styled.table`
     text-align: center;
   }
 `;
-
-export const Td = styled.td`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-`;

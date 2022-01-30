@@ -1,9 +1,21 @@
-import React from "react";
-import Button from "../Button";
-import { Table, Td } from "./styles";
-import { FaEdit, FaTrash, FaCheck } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { Table } from "./styles";
+import TodoItem from "../TodoItem";
+import axios from "axios";
 
 function TodoList() {
+  const [toDos, setToDos] = useState([]);
+
+  const fecthToDos = async () => {
+    const { data } = await axios.get(`http://localhost:3003/api/todos`);
+    setToDos(data);
+    console.log(toDos);
+  };
+
+  useEffect(() => {
+    fecthToDos();
+  }, []);
+
   return (
     <Table>
       <thead>
@@ -13,62 +25,9 @@ function TodoList() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Estudar React</td>
-          <Td>
-            <Button>
-              <FaCheck color="#16a085" />
-            </Button>
-            <Button color="#2980b9">
-              <FaEdit />
-            </Button>
-            <Button color="#c0392b">
-              <FaTrash />
-            </Button>
-          </Td>
-        </tr>
-        <tr>
-          <td>Estudar React</td>
-          <Td>
-            <Button>
-              <FaCheck color="#16a085" />
-            </Button>
-            <Button color="#2980b9">
-              <FaEdit />
-            </Button>
-            <Button color="#c0392b">
-              <FaTrash />
-            </Button>
-          </Td>
-        </tr>
-        <tr>
-          <td>Estudar React</td>
-          <Td>
-            <Button>
-              <FaCheck color="#16a085" />
-            </Button>
-            <Button color="#2980b9">
-              <FaEdit />
-            </Button>
-            <Button color="#c0392b">
-              <FaTrash />
-            </Button>
-          </Td>
-        </tr>
-        <tr>
-          <td>Estudar React</td>
-          <Td>
-            <Button>
-              <FaCheck color="#16a085" />
-            </Button>
-            <Button color="#2980b9">
-              <FaEdit />
-            </Button>
-            <Button color="#c0392b">
-              <FaTrash />
-            </Button>
-          </Td>
-        </tr>
+        {toDos?.map((toDo) => {
+          return <TodoItem key={toDo._id} description={toDo.description} />;
+        })}
       </tbody>
     </Table>
   );
