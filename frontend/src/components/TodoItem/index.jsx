@@ -4,6 +4,8 @@ import Button from "../Button";
 import { Td } from "./styles";
 
 function TodoItem({ description }) {
+  const deleteItem = async () => {};
+
   return (
     <tr>
       <td>{description}</td>
@@ -14,7 +16,7 @@ function TodoItem({ description }) {
         <Button color="#2980b9">
           <FaEdit />
         </Button>
-        <Button color="#c0392b">
+        <Button color="#c0392b" fn={deleteItem()}>
           <FaTrash />
         </Button>
       </Td>

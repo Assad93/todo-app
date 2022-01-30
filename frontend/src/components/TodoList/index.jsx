@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Table } from "./styles";
 import TodoItem from "../TodoItem";
-import axios from "axios";
 
-function TodoList() {
-  const [toDos, setToDos] = useState([]);
-
-  const fecthToDos = async () => {
-    const { data } = await axios.get(`http://localhost:3003/api/todos`);
-    setToDos(data);
-    console.log(toDos);
-  };
-
-  useEffect(() => {
-    fecthToDos();
-  }, []);
-
+function TodoList({ list }) {
   return (
     <Table>
       <thead>
@@ -25,8 +12,8 @@ function TodoList() {
         </tr>
       </thead>
       <tbody>
-        {toDos?.map((toDo) => {
-          return <TodoItem key={toDo._id} description={toDo.description} />;
+        {list?.map((item) => {
+          return <TodoItem key={item._id} description={item.description} />;
         })}
       </tbody>
     </Table>
