@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Table } from "./styles";
 import TodoItem from "../TodoItem";
+import { toDoContext } from "../../store/toDoContext";
 
-function TodoList({ list, fnUpdate }) {
+function TodoList() {
+  const { toDos } = useContext(toDoContext);
+
   return (
     <Table>
       <thead>
@@ -12,8 +15,8 @@ function TodoList({ list, fnUpdate }) {
         </tr>
       </thead>
       <tbody>
-        {list?.map((item) => {
-          return <TodoItem key={item._id} item={item} fnUpdate={fnUpdate} />;
+        {toDos?.map((item) => {
+          return <TodoItem key={item._id} item={item} />;
         })}
       </tbody>
     </Table>

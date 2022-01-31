@@ -1,29 +1,27 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useToDo from "../../hooks/useToDo";
 import PageHeader from "../PageHeader";
 import TodoForm from "../TodoForm";
 import TodoList from "../TodoList";
 import { Container, Header } from "./styles";
 
 function Todo() {
-  const [toDos, setToDos] = useState([]);
-
-  const fecthToDos = async () => {
-    const { data } = await axios.get(`http://localhost:3003/api/todos`);
-    setToDos(data);
-  };
+  const { listAll } = useToDo();
 
   useEffect(() => {
-    fecthToDos();
+    const fetchToDos = async () => {
+      await listAll();
+    };
+    fetchToDos();
   }, []);
 
   return (
     <Container>
       <Header>
         <PageHeader title={"Lista"} small="Tarefas" />
-        <TodoForm fnUpdate={fecthToDos} />
+        <TodoForm />
       </Header>
-      <TodoList list={toDos} fnUpdate={fecthToDos} />
+      <TodoList />
     </Container>
   );
 }

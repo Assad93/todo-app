@@ -1,41 +1,29 @@
-import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { FaCheck, FaEdit, FaTrash, FaFlagCheckered } from "react-icons/fa";
+import useToDo from "../../hooks/useToDo";
 import Button from "../Button";
 import { Description, Td } from "./styles";
 
-function TodoItem({ item, fnUpdate }) {
-  const [done, isDone] = useState(item.done);
-
-  const deleteItem = async () => {
-    await axios.delete(`http://localhost:3003/api/todos/${item._id}`);
-    fnUpdate();
-  };
-
-  const checkItem = async () => {
-    await axios.put(`http://localhost:3003/api/todos/${item._id}`, {
-      done: true,
-    });
-    isDone(true);
-  };
+function TodoItem({ item }) {
+  const { deleteItem, checkItem } = useToDo();
 
   return (
     <tr>
       <td>
-        <Description disabled={done}>{item.description}</Description>
+        <Description disabled={item.done}>{item.description}</Description>
       </td>
       <Td>
         <Button
-          color={done ? "#7f8c8d" : "#16a085"}
-          fn={checkItem}
-          disabled={done}
+          color={item.done ? "#7f8c8d" : "#16a085"}
+          fn={() => checkItem(item._id)}
+          disabled={item.done}
         >
-          {!done ? <FaCheck /> : <FaFlagCheckered />}
+          {!item.done ? <FaCheck /> : <FaFlagCheckered />}
         </Button>
         <Button color="#2980b9">
           <FaEdit />
         </Button>
-        <Button color="#c0392b" fn={deleteItem}>
+        <Button color="#c0392b" fn={() => deleteItem(item._id)}>
           <FaTrash />
         </Button>
       </Td>

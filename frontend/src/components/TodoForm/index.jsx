@@ -1,19 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import useToDo from "../../hooks/useToDo";
 import Button from "../Button";
 import { Input, InputGroup } from "./styles";
 
-function TodoForm({ fnUpdate }) {
+function TodoForm() {
   const [description, setDescription] = useState("");
-
-  const saveDescription = async () => {
-    await axios.post("http://localhost:3003/api/todos", {
-      description: description,
-    });
-    setDescription("");
-    fnUpdate();
-  };
+  const { insertItem } = useToDo();
 
   return (
     <InputGroup>
@@ -23,7 +16,11 @@ function TodoForm({ fnUpdate }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <Button type="button" color="#16a085" fn={saveDescription}>
+      <Button
+        type="button"
+        color="#16a085"
+        fn={() => insertItem(description, setDescription)}
+      >
         <FaPlus />
       </Button>
     </InputGroup>
