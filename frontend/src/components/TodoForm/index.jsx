@@ -19,6 +19,7 @@ function TodoForm() {
       <Button
         type="button"
         color="#16a085"
+        width={50}
         fn={() => insertItem(description, setDescription)}
       >
         <FaPlus />

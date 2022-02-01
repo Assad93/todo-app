@@ -23,6 +23,13 @@ const useToDo = () => {
     listAll();
   };
 
+  const updateItem = async (id, description) => {
+    await axios.put(`http://localhost:3003/api/todos/${id}`, {
+      description: description,
+    });
+    listAll();
+  };
+
   const checkItem = async (id) => {
     await axios.put(`http://localhost:3003/api/todos/${id}`, {
       done: true,
@@ -34,6 +41,7 @@ const useToDo = () => {
     listAll,
     insertItem,
     deleteItem,
+    updateItem,
     checkItem,
   };
 };
