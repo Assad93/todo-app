@@ -40,16 +40,6 @@ export const Body = styled.div`
   justify-content: center;
 `;
 
-export const Input = styled.input`
-  height: 40px;
-  width: 480px;
-  padding: 5px;
-  border: 2px solid #000;
-  border-radius: 2px;
-  outline: none;
-  font-size: 24px;
-`;
-
 export const Footer = styled.div`
   padding: 10px;
   display: flex;

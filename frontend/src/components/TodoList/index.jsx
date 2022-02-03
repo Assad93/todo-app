@@ -1,16 +1,87 @@
-import React, { useContext } from "react";
-import { Table } from "./styles";
+import React, { useContext, useState } from "react";
+import { SortButton, Table, Title } from "./styles";
 import TodoItem from "../TodoItem";
 import { toDoContext } from "../../store/toDoContext";
+import {
+  FaSortAlphaDown,
+  FaSortAlphaUp,
+  FaSortDown,
+  FaSortNumericDown,
+  FaSortNumericUp,
+  FaSortUp,
+} from "react-icons/fa";
+import useToDo from "../../hooks/useToDo";
 
 function TodoList() {
   const { toDos } = useContext(toDoContext);
+  const { listAllDesc, listAll, listAllDateAsc, listAllDateDesc } = useToDo();
+  const [ascSorted, isAscSorted] = useState(true);
+  const [dateAscSorted, isDateAscSorted] = useState(true);
+
+  const ascSort = async () => {
+    await listAll();
+    isAscSorted(true);
+  };
+
+  const descSort = async () => {
+    await listAllDesc();
+    isAscSorted(false);
+  };
+
+  const dateAscSort = async () => {
+    await listAllDateAsc();
+    isDateAscSorted(true);
+  };
+
+  const dateDescSort = async () => {
+    await listAllDateDesc();
+    isDateAscSorted(false);
+  };
 
   return (
     <Table>
       <thead>
         <tr>
-          <th>Descrição</th>
+          <th>
+            <Title>
+              Descrição
+              <SortButton>
+                {ascSorted ? (
+                  <FaSortAlphaDown
+                    size={30}
+                    color="#16a085"
+                    onClick={() => descSort()}
+                  />
+                ) : (
+                  <FaSortAlphaUp
+                    size={30}
+                    color="#16a085"
+                    onClick={() => ascSort()}
+                  />
+                )}
+              </SortButton>
+            </Title>
+          </th>
+          <th>
+            <Title>
+              Data de Criação
+              <SortButton>
+                {dateAscSorted ? (
+                  <FaSortNumericDown
+                    size={30}
+                    color="#16a085"
+                    onClick={() => dateDescSort()}
+                  />
+                ) : (
+                  <FaSortNumericUp
+                    size={30}
+                    color="#16a085"
+                    onClick={() => dateAscSort()}
+                  />
+                )}
+              </SortButton>
+            </Title>
+          </th>
           <th>Ações</th>
         </tr>
       </thead>

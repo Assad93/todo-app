@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import useToDo from "../../hooks/useToDo";
 import Button from "../Button";
-import { Body, Content, Footer, Header, Input, Modal, Title } from "./styles";
+import Input from "../Input";
+import { Body, Content, Footer, Header, Modal, Title } from "./styles";
 
 function EditDialog({ show, onClose, item }) {
   const [description, setDescription] = useState(item.description);

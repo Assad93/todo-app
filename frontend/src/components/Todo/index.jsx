@@ -4,6 +4,7 @@ import EditDialog from "../EditDialog";
 import PageHeader from "../PageHeader";
 import TodoForm from "../TodoForm";
 import TodoList from "../TodoList";
+import TodoSearch from "../TodoSearch";
 import { Container, Header } from "./styles";
 
 function Todo() {
@@ -20,6 +21,7 @@ function Todo() {
     <Container>
       <Header>
         <PageHeader title={"Lista"} small="Tarefas" />
+        <TodoSearch />
         <TodoForm />
       </Header>
       <TodoList />

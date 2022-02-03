@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import useToDo from "../../hooks/useToDo";
 import Button from "../Button";
-import { Input, InputGroup } from "./styles";
+import Input from "../Input";
+import { InputGroup } from "./styles";
 
 function TodoForm() {
   const [description, setDescription] = useState("");

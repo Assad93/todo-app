@@ -9,12 +9,22 @@ function TodoItem({ item }) {
   const [show, setShow] = useState(false);
   const { deleteItem, checkItem } = useToDo();
 
+  const formatDate = () => {
+    const date = new Date(item.createdAt);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    const formatedDate = day + "-" + month + "-" + year;
+    return formatedDate;
+  };
+
   return (
     <>
       <tr>
         <td>
           <Description disabled={item.done}>{item.description}</Description>
         </td>
+        <td>{formatDate()}</td>
         <Td>
           <Button
             color={item.done ? "#7f8c8d" : "#16a085"}
