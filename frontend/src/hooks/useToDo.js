@@ -60,6 +60,13 @@ const useToDo = () => {
     listAll();
   };
 
+  const filterToDos = async (description) => {
+    const { data } = await axios.get(
+      `http://localhost:3003/api/todos?description__regex=/${description}/i`
+    );
+    return data;
+  };
+
   return {
     listAll,
     listAllDesc,
@@ -69,6 +76,7 @@ const useToDo = () => {
     deleteItem,
     updateItem,
     checkItem,
+    filterToDos,
   };
 };
 

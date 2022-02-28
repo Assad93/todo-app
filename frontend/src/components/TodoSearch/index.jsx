@@ -1,16 +1,50 @@
-import React from "react";
-import Button from "../Button";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Input from "../Input";
-import { FaSearch } from "react-icons/fa";
-import { InputSearch } from "./styles";
+import { IconContainer, InputSearch, SearchIcon, SearchInput } from "./styles";
+import { toDoContext } from "../../store/toDoContext";
+import useToDo from "../../hooks/useToDo";
 
 function TodoSearch() {
+  const { setToDos } = useContext(toDoContext);
+  const [search, setSearch] = useState("");
+  const { filterToDos } = useToDo();
+  let timeoutRef = useRef(null);
+  let mountRef = useRef(false);
+
+  const handleSearchInput = async (e) => {
+    setSearch(e.target.value.toLowerCase());
+  };
+
+  useEffect(() => {
+    function debouncedSearch() {
+      if (timeoutRef.current) {
+        clearInterval(timeoutRef.current);
+      }
+
+      timeoutRef.current = setTimeout(async () => {
+        const toDosInBD = await filterToDos(search);
+        console.log(toDosInBD);
+        setToDos(toDosInBD);
+      }, 300);
+    }
+
+    if (mountRef.current) {
+      debouncedSearch();
+    }
+
+    mountRef.current = true;
+  }, [search]);
+
   return (
     <InputSearch>
-      <Input placeholder="Buscar..." />
-      <Button width={50} color="#16a085">
-        <FaSearch />
-      </Button>
+      <SearchInput
+        placeholder="Buscar..."
+        onChange={handleSearchInput}
+        value={search}
+      />
+      <IconContainer>
+        <SearchIcon />
+      </IconContainer>
     </InputSearch>
   );
 }
