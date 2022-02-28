@@ -18,8 +18,7 @@ export const Modal = styled.div`
 export const Content = styled.div`
   width: 500px;
   background-color: #fff;
-  transform: ${(props) =>
-    props.show ? "translateY(0)" : "translateY(-200px)"};
+  transform: ${(props) => (props.show ? "translateY(0)" : "translateY(-50px)")};
   transition: all 0.3s ease-in-out;
 `;
 
@@ -30,14 +29,6 @@ export const Header = styled.div`
 export const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
-`;
-
-export const Body = styled.div`
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: center;
 `;
 
 export const Footer = styled.div`
