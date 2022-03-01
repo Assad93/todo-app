@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCheck, FaEdit, FaTrash, FaFlagCheckered } from "react-icons/fa";
-import useToDo from "../../hooks/useToDo";
 import Button from "../Button";
+import CheckDialog from "../Dialogs/CheckDialog";
 import DeleteDialog from "../Dialogs/DeleteDialog";
 import EditDialog from "../Dialogs/EditDialog";
 import { Description, Td } from "./styles";
@@ -9,7 +9,7 @@ import { Description, Td } from "./styles";
 function TodoItem({ item }) {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const { deleteItem, checkItem } = useToDo();
+  const [showCheckDialog, setShowCheckDialog] = useState(false);
 
   const formatDate = () => {
     const date = new Date(item.createdAt);
@@ -31,7 +31,7 @@ function TodoItem({ item }) {
           <Button
             color={item.done ? "#7f8c8d" : "#16a085"}
             width={50}
-            fn={() => checkItem(item._id)}
+            fn={() => setShowCheckDialog(true)}
             disabled={item.done}
           >
             {!item.done ? <FaCheck /> : <FaFlagCheckered />}
@@ -61,6 +61,11 @@ function TodoItem({ item }) {
       <DeleteDialog
         show={showDeleteDialog}
         onClose={() => setShowDeleteDialog(false)}
+        item={item}
+      />
+      <CheckDialog
+        show={showCheckDialog}
+        onClose={() => setShowCheckDialog(false)}
         item={item}
       />
     </>

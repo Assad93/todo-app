@@ -10,7 +10,7 @@ function Menu() {
       </Brand>
       <NavMenu>
         <li>
-          <a href="/todos">Todo's</a>
+          <a href="/todos">ToDo's</a>
         </li>
         <li>
           <a href="/about">Sobre</a>

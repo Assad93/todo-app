@@ -14,27 +14,28 @@ import useToDo from "../../hooks/useToDo";
 
 function TodoList() {
   const { toDos } = useContext(toDoContext);
-  const { listAllDesc, listAll, listAllDateAsc, listAllDateDesc } = useToDo();
+  const { listAllDesc, listAll, listAllAlphaOrderAsc, listAllAlphaOrderDesc } =
+    useToDo();
   const [ascSorted, isAscSorted] = useState(true);
   const [dateAscSorted, isDateAscSorted] = useState(true);
 
-  const ascSort = async () => {
-    await listAll();
+  const alphabeticalOrderAscSort = async () => {
+    await listAllAlphaOrderAsc();
     isAscSorted(true);
   };
 
-  const descSort = async () => {
-    await listAllDesc();
+  const alphabeticalOrderDescSort = async () => {
+    await listAllAlphaOrderDesc();
     isAscSorted(false);
   };
 
   const dateAscSort = async () => {
-    await listAllDateAsc();
+    await listAll();
     isDateAscSorted(true);
   };
 
   const dateDescSort = async () => {
-    await listAllDateDesc();
+    await listAllDesc();
     isDateAscSorted(false);
   };
 
@@ -50,13 +51,13 @@ function TodoList() {
                   <FaSortAlphaDown
                     size={30}
                     color="#16a085"
-                    onClick={() => descSort()}
+                    onClick={() => alphabeticalOrderDescSort()}
                   />
                 ) : (
                   <FaSortAlphaUp
                     size={30}
                     color="#16a085"
-                    onClick={() => ascSort()}
+                    onClick={() => alphabeticalOrderAscSort()}
                   />
                 )}
               </SortButton>

@@ -12,11 +12,11 @@ import {
   Title,
 } from "../styles";
 
-function DeleteDialog({ show, onClose, item }) {
-  const { deleteItem } = useToDo();
+function CheckDialog({ show, onClose, item }) {
+  const { checkItem } = useToDo();
 
-  const deleteToDo = async () => {
-    await deleteItem(item._id);
+  const checkToDo = async () => {
+    await checkItem(item._id);
     onClose();
   };
 
@@ -24,16 +24,18 @@ function DeleteDialog({ show, onClose, item }) {
     <Modal onClick={onClose} show={show}>
       <Content onClick={(e) => e.stopPropagation()}>
         <Header>
-          <Title>Deletar Tarefa</Title>
+          <Title>Finalizar Tarefa</Title>
         </Header>
         <Body>
-          <Description>Tem certeza que deseja deletar esta tarefa?</Description>
+          <Description>
+            Tem certeza que deseja finalizar esta tarefa?
+          </Description>
         </Body>
         <Footer>
           <Button color="#c0392b" fn={onClose}>
             Cancelar
           </Button>
-          <Button color="#16a085" fn={deleteToDo}>
+          <Button color="#16a085" fn={checkToDo}>
             Confirmar
           </Button>
         </Footer>
@@ -43,4 +45,4 @@ function DeleteDialog({ show, onClose, item }) {
   );
 }
 
-export default DeleteDialog;
+export default CheckDialog;

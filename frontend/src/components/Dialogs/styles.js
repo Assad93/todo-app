@@ -31,6 +31,21 @@ export const Title = styled.div`
   font-weight: bold;
 `;
 
+export const Body = styled.div`
+  padding: 10px;
+  height: 150px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Description = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+`;
+
 export const Footer = styled.div`
   padding: 10px;
   display: flex;

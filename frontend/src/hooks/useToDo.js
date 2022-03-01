@@ -7,28 +7,28 @@ const useToDo = () => {
 
   const listAll = async () => {
     const { data } = await axios.get(
-      `http://localhost:3003/api/todos/?sort=description`
+      `http://localhost:3003/api/todos/?sort=createdAt`
     );
     setToDos(data);
   };
 
   const listAllDesc = async () => {
     const { data } = await axios.get(
-      `http://localhost:3003/api/todos/?sort=-description`
-    );
-    setToDos(data);
-  };
-
-  const listAllDateAsc = async () => {
-    const { data } = await axios.get(
-      `http://localhost:3003/api/todos/?sort=createdAt`
-    );
-    setToDos(data);
-  };
-
-  const listAllDateDesc = async () => {
-    const { data } = await axios.get(
       `http://localhost:3003/api/todos/?sort=-createdAt`
+    );
+    setToDos(data);
+  };
+
+  const listAllAlphaOrderAsc = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3003/api/todos/?sort=description`
+    );
+    setToDos(data);
+  };
+
+  const listAllAlphaOrderDesc = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3003/api/todos/?sort=-description`
     );
     setToDos(data);
   };
@@ -70,8 +70,8 @@ const useToDo = () => {
   return {
     listAll,
     listAllDesc,
-    listAllDateAsc,
-    listAllDateDesc,
+    listAllAlphaOrderAsc,
+    listAllAlphaOrderDesc,
     insertItem,
     deleteItem,
     updateItem,
