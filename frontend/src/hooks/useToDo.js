@@ -62,7 +62,7 @@ const useToDo = () => {
 
   const filterToDos = async (description) => {
     const { data } = await axios.get(
-      `http://localhost:3003/api/todos?description__regex=/${description}/i`
+      `http://localhost:3003/api/todos/?description__regex=/${description}/i`
     );
     return data;
   };

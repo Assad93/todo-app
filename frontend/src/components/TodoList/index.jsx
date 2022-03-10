@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SortButton, Table, Title } from "./styles";
 import TodoItem from "../TodoItem";
 import { toDoContext } from "../../store/toDoContext";
 import {
   FaSortAlphaDown,
   FaSortAlphaUp,
-  FaSortDown,
   FaSortNumericDown,
   FaSortNumericUp,
-  FaSortUp,
 } from "react-icons/fa";
 import useToDo from "../../hooks/useToDo";
 
@@ -18,6 +16,8 @@ function TodoList() {
     useToDo();
   const [ascSorted, isAscSorted] = useState(true);
   const [dateAscSorted, isDateAscSorted] = useState(true);
+
+  useEffect(() => console.log(toDos), []);
 
   const alphabeticalOrderAscSort = async () => {
     await listAllAlphaOrderAsc();
@@ -40,58 +40,60 @@ function TodoList() {
   };
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>
-            <Title>
-              Descrição
-              <SortButton>
-                {ascSorted ? (
-                  <FaSortAlphaDown
-                    size={30}
-                    color="#16a085"
-                    onClick={() => alphabeticalOrderDescSort()}
-                  />
-                ) : (
-                  <FaSortAlphaUp
-                    size={30}
-                    color="#16a085"
-                    onClick={() => alphabeticalOrderAscSort()}
-                  />
-                )}
-              </SortButton>
-            </Title>
-          </th>
-          <th>
-            <Title>
-              Data de Criação
-              <SortButton>
-                {dateAscSorted ? (
-                  <FaSortNumericDown
-                    size={30}
-                    color="#16a085"
-                    onClick={() => dateDescSort()}
-                  />
-                ) : (
-                  <FaSortNumericUp
-                    size={30}
-                    color="#16a085"
-                    onClick={() => dateAscSort()}
-                  />
-                )}
-              </SortButton>
-            </Title>
-          </th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {toDos?.map((item) => {
-          return <TodoItem key={item._id} item={item} />;
-        })}
-      </tbody>
-    </Table>
+    <>
+      <Table>
+        <thead>
+          <tr>
+            <th>
+              <Title>
+                Descrição
+                <SortButton>
+                  {ascSorted ? (
+                    <FaSortAlphaDown
+                      size={30}
+                      color="#16a085"
+                      onClick={() => alphabeticalOrderDescSort()}
+                    />
+                  ) : (
+                    <FaSortAlphaUp
+                      size={30}
+                      color="#16a085"
+                      onClick={() => alphabeticalOrderAscSort()}
+                    />
+                  )}
+                </SortButton>
+              </Title>
+            </th>
+            <th>
+              <Title>
+                Data de Criação
+                <SortButton>
+                  {dateAscSorted ? (
+                    <FaSortNumericDown
+                      size={30}
+                      color="#16a085"
+                      onClick={() => dateDescSort()}
+                    />
+                  ) : (
+                    <FaSortNumericUp
+                      size={30}
+                      color="#16a085"
+                      onClick={() => dateAscSort()}
+                    />
+                  )}
+                </SortButton>
+              </Title>
+            </th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {toDos?.map((item) => {
+            return <TodoItem key={item._id} item={item} />;
+          })}
+        </tbody>
+      </Table>
+    </>
   );
 }
 
